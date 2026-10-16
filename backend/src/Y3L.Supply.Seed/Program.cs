@@ -154,19 +154,23 @@ static class Seed
             }
         }
 
-        // ensure index
-        using (var head = new HttpRequestMessage(HttpMethod.Head, $"{EsUrl}/{EsIndex}"))
-        using (var resp = await Http.SendAsync(head))
+        // ensure a PRISTINE index: PG was TRUNCATEd and MongoDB cleared above,
+        // so ES must also start empty. Otherwise stale docs from previous runs
+        // keep their old order_ids; a later dual-write would overwrite a stale
+        // PENDING doc with a fresh PENDING doc and the search count would never
+        // increase (t_sync_new_order would fail deterministically).
+        using (var del = new HttpRequestMessage(HttpMethod.Delete, $"{EsUrl}/{EsIndex}"))
+        using (var delResp = await Http.SendAsync(del))
         {
-            if (resp.StatusCode == System.Net.HttpStatusCode.NotFound)
-            {
-                var mappings = JsonNode.Parse(
-                    await File.ReadAllTextAsync("seed/es-mapping.json"))!["mappings"]!
-                    .ToJsonString();
-                using var put = new StringContent(mappings, Encoding.UTF8, "application/json");
-                using var r2 = await Http.PutAsync($"{EsUrl}/{EsIndex}", put);
-                r2.EnsureSuccessStatusCode();
-            }
+            // 200 = deleted, 404 = didn't exist; both are fine
+        }
+        {
+            var mappings = JsonNode.Parse(
+                await File.ReadAllTextAsync("seed/es-mapping.json"))!["mappings"]!
+                .ToJsonString();
+            using var put = new StringContent(mappings, Encoding.UTF8, "application/json");
+            using var r2 = await Http.PutAsync($"{EsUrl}/{EsIndex}", put);
+            r2.EnsureSuccessStatusCode();
         }
 
         if (docs.Count == 0) return 0;
