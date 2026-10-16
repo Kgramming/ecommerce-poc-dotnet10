@@ -21,7 +21,7 @@ This is **stage 3** of the polyglot chain:
 | 4 | Node.js | coming next |
 
 Runs **side-by-side** with the other backends — Python on `:8000`, Java on `:8001`,
-.NET on `:8002`, all serving the same UI and the same data.
+.NET on `:8003`, all serving the same UI and the same data.
 
 ## What this is
 
@@ -84,15 +84,15 @@ PostgreSQL `:5435`, MongoDB `:27017`, Elasticsearch `:9200`.
 # seed the data stack (from the repo root)
 dotnet run --project backend/src/Y3L.Supply.Seed
 
-# run the API (port 8002)
+# run the API (port 8003)
 dotnet run --project backend/src/Y3L.Supply.Api
 
-# frontend (port 5175, /api proxied to :8002)
+# frontend (port 5175, /api proxied to :8003)
 cd frontend && npm install
-VITE_API_URL=http://localhost:8002 npm run dev -- --port 5175
+VITE_API_URL=http://localhost:8003 npm run dev -- --port 5175
 
 # acceptance — 12/12 on a pristine seed
-python3 tools/acceptance.py --base http://localhost:8002
+python3 tools/acceptance.py --base http://localhost:8003
 ```
 
 Environment overrides ([`.env.example`](.env.example)):

@@ -34,3 +34,4 @@
 /home/hatch/workspace/ecommerce-poc-dotnet10/backend/src/Y3L.Supply.Api/obj/Debug/net10.0/Y3L.Supply.Api.pdb
 /home/hatch/workspace/ecommerce-poc-dotnet10/backend/src/Y3L.Supply.Api/obj/Debug/net10.0/Y3L.Supply.Api.genruntimeconfig.cache
 /home/hatch/workspace/ecommerce-poc-dotnet10/backend/src/Y3L.Supply.Api/obj/Debug/net10.0/ref/Y3L.Supply.Api.dll
+/home/hatch/workspace/ecommerce-poc-dotnet10/backend/src/Y3L.Supply.Api/obj/Debug/net10.0/Y3L.Supply.Api.sourcelink.json

@@ -18,7 +18,7 @@ var esUrl = $"http://{Env("ESHOST", "localhost")}:{Env("ESPORT", "9200")}";
 var esIndex = Env("ESINDEX", "orders");
 var syncStrategy = Env("SYNC_STRATEGY", "dual_write");
 
-builder.WebHost.UseUrls("http://0.0.0.0:8002");
+builder.WebHost.UseUrls("http://0.0.0.0:8003");
 
 builder.Services.AddControllers();
 builder.Services.AddCors(o => o.AddDefaultPolicy(p => p
