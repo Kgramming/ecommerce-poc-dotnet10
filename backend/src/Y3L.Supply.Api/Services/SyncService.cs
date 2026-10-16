@@ -30,9 +30,9 @@ public class SyncService(EsClient es, string index, ILogger<SyncService> log)
         try
         {
             if (await es.IndexExistsAsync(Index)) return;
-            var raw = await File.ReadAllTextAsync("es-mapping.json");
-            var mappings = JsonNode.Parse(raw)!["mappings"]!.ToJsonString();
-            await es.CreateIndexAsync(Index, mappings);
+            // PUT the whole file: ES expects {"mappings": {...}} at the top level
+            var body = await File.ReadAllTextAsync("es-mapping.json");
+            await es.CreateIndexAsync(Index, body);
             log.LogInformation("created ES index {Index}", Index);
         }
         catch (Exception ex)

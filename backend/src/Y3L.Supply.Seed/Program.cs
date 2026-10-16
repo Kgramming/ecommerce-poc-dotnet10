@@ -165,10 +165,9 @@ static class Seed
             // 200 = deleted, 404 = didn't exist; both are fine
         }
         {
-            var mappings = JsonNode.Parse(
-                await File.ReadAllTextAsync("seed/es-mapping.json"))!["mappings"]!
-                .ToJsonString();
-            using var put = new StringContent(mappings, Encoding.UTF8, "application/json");
+            // PUT the whole file: ES expects {"mappings": {...}} at the top level
+            var body = await File.ReadAllTextAsync("seed/es-mapping.json");
+            using var put = new StringContent(body, Encoding.UTF8, "application/json");
             using var r2 = await Http.PutAsync($"{EsUrl}/{EsIndex}", put);
             r2.EnsureSuccessStatusCode();
         }
