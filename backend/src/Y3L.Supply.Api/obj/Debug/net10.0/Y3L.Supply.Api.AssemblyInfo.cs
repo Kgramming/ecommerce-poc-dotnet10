@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Y3L.Supply.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e32f024887cb0289448530f7381c5c1d246b8b03")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+008bf13f3738ae9f286806bdf50ea7d6687a184a")]
 [assembly: System.Reflection.AssemblyProductAttribute("Y3L.Supply.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Y3L.Supply.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

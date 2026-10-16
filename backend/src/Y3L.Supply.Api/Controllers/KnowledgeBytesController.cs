@@ -27,6 +27,8 @@ public class KnowledgeBytesController : ControllerBase
                      Path.Combine(cwd, "knowledge-bytes"),
                      Path.Combine(cwd, "..", "knowledge-bytes"),
                      Path.Combine(cwd, "..", "..", "knowledge-bytes"),
+                     // dotnet run --project forces CWD to backend/src/Y3L.Supply.Api
+                     Path.Combine(cwd, "..", "..", "..", "knowledge-bytes"),
                  })
         {
             var full = Path.GetFullPath(cand);
